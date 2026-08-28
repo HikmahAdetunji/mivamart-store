@@ -6,6 +6,7 @@ import {
   NavLink,
   Route,
   Routes,
+  useLocation,
   useParams,
 } from "react-router-dom";
 import { cld } from "./cloudinary";
@@ -380,10 +381,6 @@ function Header({ cartCount, wishlistCount, onSearch }) {
             {cartCount > 0 && <span className="count-badge">{cartCount}</span>}
           </Link>
 
-          <button className="icon-btn desktop-only" aria-label="Account">
-            <Icon name="user" />
-          </button>
-
           <button
             className="icon-btn mobile-menu-btn"
             onClick={() => setOpen((value) => !value)}
@@ -426,7 +423,7 @@ function SearchOverlay({ open, query, setQuery, onClose }) {
             autoFocus
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search bowls, mugs, vases..."
+            placeholder="Search dinnerware, home decor, vases..."
           />
         </div>
 
@@ -476,7 +473,7 @@ function Hero() {
   return (
     <section className="hero">
       <div className="container hero-grid">
-        <div className="hero-copy">
+        <div className="hero-copy" data-scroll-reveal data-reveal-direction="left">
           <h1>Make Memories <span>with Miva.</span></h1>
           <p>
             Explore our curated selection of handmade homeware designed to bring warmth,
@@ -487,7 +484,7 @@ function Hero() {
             <Link className="btn btn-primary" to="/shop">
               Shop collection <Icon name="arrow" size={18} />
             </Link>
-            <Link className="text-link" to="/about">Discover MivaMart</Link>
+            <Link className="text-link" to="/about">About MivaMart</Link>
           </div>
 
           <div className="hero-notes">
@@ -497,7 +494,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="hero-visual">
+        <div className="hero-visual" data-scroll-reveal data-reveal-direction="right">
           <div className="hero-backdrop" />
           <img
             src={heroImage}
@@ -511,7 +508,7 @@ function Hero() {
 
 function Categories() {
   return (
-    <section className="section categories-section">
+    <section className="section categories-section" data-scroll-reveal>
       <div className="container">
         <div className="section-heading">
           <div>
@@ -547,9 +544,7 @@ function Categories() {
 
 function ProductCard({ product, liked, onLike, onAdd, compact = false }) {
   const [selectedColour, setSelectedColour] = useState(product.colours[0]);
-  const selectedImage = cld.image(
-    product.images[selectedColour]
-  );
+ 
   return (
     <article className={`product-card ${compact ? "product-card-horizontal" : ""}`}>
       <Link
@@ -619,7 +614,7 @@ function HorizontalProductSection({
   onAdd,
 }) {
   return (
-    <section className="section products-section" id={id}>
+    <section className="section products-section" id={id} data-scroll-reveal>
       <div className="container">
         <div className="section-heading product-heading">
           <div>
@@ -650,7 +645,7 @@ function HorizontalProductSection({
 
 function Promo() {
   return (
-    <section className="promo-section">
+    <section className="promo-section" data-scroll-reveal>
       <div className="container">
         <div className="promo-card">
           <div className="promo-copy">
@@ -687,7 +682,7 @@ function Newsletter() {
   }
 
   return (
-    <section className="newsletter">
+    <section className="newsletter" data-scroll-reveal>
       <div className="container newsletter-inner">
         <div>
           <p className="eyebrow">Stay in the loop</p>
@@ -718,7 +713,7 @@ function Newsletter() {
 
 function Footer() {
   return (
-    <footer className="footer" id="footer">
+    <footer className="footer" id="footer" data-scroll-reveal>
       <div className="container footer-grid">
         <div className="footer-brand">
           <Logo />
@@ -814,7 +809,7 @@ function ShopPage({ wishlist, onLike, onAdd }) {
     : products.filter((product) => product.category === category);
 
   return (
-    <section className="page-section">
+    <section className="page-section" data-scroll-reveal>
       <div className="container">
         <div className="page-hero compact-page-hero">
           <p className="eyebrow">MivaMart collection</p>
@@ -868,7 +863,7 @@ function CategoryPage({ wishlist, onLike, onAdd }) {
   const categoryProducts = products.filter((product) => product.category === category.name);
 
   return (
-    <section className="page-section">
+    <section className="page-section" data-scroll-reveal>
       <div className="container">
         <div className="category-page-hero">
           <div>
@@ -929,7 +924,7 @@ function ProductPage({ wishlist, onLike, onAdd }) {
   const category = categories.find((item) => item.name === product.category);
 
   return (
-    <section className="page-section product-page">
+    <section className="page-section product-page" data-scroll-reveal>
       <div className="container product-detail-grid">
         <div className="product-detail-image">
           <ColourisedImage
@@ -1000,7 +995,7 @@ function ProductPage({ wishlist, onLike, onAdd }) {
 function AboutPage() {
   return (
     <main>
-      <section className="about-hero">
+      <section className="about-hero" data-scroll-reveal>
         <div className="container about-hero-grid">
           <div>
             <p className="eyebrow">About MivaMart</p>
@@ -1018,7 +1013,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" data-scroll-reveal>
         <div className="container about-story-grid">
             <div className="about-story-copy">
             <img
@@ -1044,7 +1039,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="about-values">
+      <section className="about-values" data-scroll-reveal>
         <div className="container value-grid">
           <article>
             <span>01</span>
@@ -1072,7 +1067,7 @@ function WishlistPage({ wishlist, onLike, onAdd, clearWishlist }) {
   const savedProducts = products.filter((product) => wishlist.includes(product.id));
 
   return (
-    <section className="page-section wishlist-page">
+    <section className="page-section wishlist-page" data-scroll-reveal>
       <div className="container">
         <div className="wishlist-page-head">
           <div className="page-hero compact-page-hero">
@@ -1129,7 +1124,7 @@ function CartPage({ cart, updateQuantity, removeItem, clearCart }) {
   const total = subtotal + shipping;
 
   return (
-    <section className="page-section cart-page">
+    <section className="page-section cart-page" data-scroll-reveal>
       <div className="container">
         <div className="page-hero compact-page-hero">
           <p className="eyebrow">Your basket</p>
@@ -1261,6 +1256,7 @@ function Toast({ message }) {
 
 
 export default function App() {
+  const location = useLocation();
   
   const [wishlist, setWishlist] = useState(() => {
     try {
@@ -1295,6 +1291,30 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [toast, setToast] = useState("");
+
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-scroll-reveal]");
+
+    // Keep content accessible in older browsers that do not support the observer.
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px" }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, [location.pathname]);
 
   useEffect(() => {
     localStorage.setItem("mivamart-cart", JSON.stringify(cart));

@@ -578,12 +578,14 @@ img {
   padding: 4px 2px 18px;
   scrollbar-width: thin;
   scrollbar-color: var(--primary) var(--primary-soft);
+ pointer-events:arrow;
 }
 
-.horizontal-product-scroll::-webkit-scrollbar { height: 8px; }
+.horizontal-product-scroll::-webkit-scrollbar {
+  display:none; 
+}
 .horizontal-product-scroll::-webkit-scrollbar-track {
-  background: var(--primary-soft);
-  border-radius: 999px;
+  display:none;
 }
 .horizontal-product-scroll::-webkit-scrollbar-thumb {
   background: var(--primary);
@@ -1552,6 +1554,36 @@ img {
   .search-result-item img {
     width: 62px;
     height: 62px;
+  }
+}
+
+/* Data-scroll reveal */
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(70px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Hero section Data Scroll animation */
+[data-scroll-reveal][data-reveal-direction="left"] {
+  transform: translateX(-56px);
+}
+
+[data-scroll-reveal][data-reveal-direction="right"] {
+  transform: translateX(56px);
+}
+
+[data-scroll-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
