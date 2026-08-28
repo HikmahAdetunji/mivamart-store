@@ -906,9 +906,9 @@ function ProductPage({ wishlist, onLike, onAdd }) {
 
   useEffect(() => {
     if (product) {
-      setSelectedColour(product.colours[0]);
+      setSelectedColour(product.colours?.[0] || " ");
     }
-  }, [productSlug]);
+  }, [product]);
 
   if (!product) {
     return (
