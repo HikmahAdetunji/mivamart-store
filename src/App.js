@@ -874,7 +874,10 @@ function CategoryPage({ wishlist, onLike, onAdd }) {
               that fit beautifully into your everyday space.
             </p>
           </div>
-          <img src={category.image} alt={category.name} />
+         <AdvancedImage
+          cldImg={cld.image(category.image)}
+          alt={`${category.name}`}
+        />
         </div>
 
         <div className="category-page-meta">
@@ -926,17 +929,19 @@ function ProductPage({ wishlist, onLike, onAdd }) {
     );
   }
 
+
+
   const category = categories.find((item) => item.name === product.category);
 
   return (
     <section className="page-section product-page" data-scroll-reveal>
       <div className="container product-detail-grid">
         <div className="product-detail-image">
-          <ColourisedImage
-            src={product.image}
-            alt={`${product.name} in ${getColourName(selectedColour)}`}
-            colour={selectedColour}
-          />
+
+          <AdvancedImage
+          cldImg={cld.image(product.images[selectedColour])}
+          alt={`${product.name} in ${getColourName(selectedColour)}`}
+        />
         </div>
 
         <div className="product-detail-copy">
