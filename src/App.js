@@ -908,7 +908,7 @@ function ProductPage({ wishlist, onLike, onAdd }) {
     if (product) {
       setSelectedColour(product.colours?.[0] || " ");
     }
-  }, [product]);
+  }, [products]);
 
   if (!product) {
     return (
