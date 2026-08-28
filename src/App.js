@@ -904,11 +904,16 @@ function ProductPage({ wishlist, onLike, onAdd }) {
   const product = products.find((item) => item.slug === productSlug);
   const [selectedColour, setSelectedColour] = useState(product?.colours?.[0] || "");
 
-  useEffect(() => {
-    if (product) {
-      setSelectedColour(product.colours?.[0] || " ");
-    }
-  }, [products]);
+ useEffect(() => {
+    const currentProduct = products.find(
+      (item) => item.slug === productSlug
+    );
+
+    setSelectedColour(
+      currentProduct?.colours?.[0] || ""
+    );
+  }, [productSlug]);
+
 
   if (!product) {
     return (
